@@ -1,2 +1,2 @@
 # embed
-This script can expand `source &lt;file>` and output the result
+This script can expand `source <file>` and output the result
