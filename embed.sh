@@ -36,8 +36,8 @@ function embed_source() {
     local embed_row
 
     content="$(cat "${file}")"
-    rel_file="$(echo "${file}" | sed "s#${current}/##")"
-    rel_root_file="$(echo "${root_file}" | sed "s#${current}/##")"
+    rel_file="$(realpath "${file}" --relative-to="${current}")"
+    rel_root_file="$(realpath "${root_file}" --relative-to="${current}")"
 
     for line in ${content}; do
         # Skip comments
@@ -61,7 +61,7 @@ function embed_source() {
         if [[ ! "${raw_embed_row}" =~ ^/ ]]; then
             raw_embed_row="$(realpath "${current}/${raw_embed_row}")"
         fi
-        embed_row="$(echo "${raw_embed_row}" | sed "s#${current}/##")"
+        embed_row="$(realpath "${raw_embed_row}" --relative-to="${current}")"
 
         # Skip cannot find EMBEDDED file
         if [[ "${embed_row}" == "" ]]; then
